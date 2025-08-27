@@ -23,6 +23,19 @@ Run the following CLI command from your terminal:
 
 `sudo apt install build-essential`
 
+### Environments
+
+The learner is requested to create all the environments in the `environments` folder at this point. 
+
+Here is where the environments will be used:
+- bde: Lesson 2.1 onwards
+- elt: Lesson 2.5 onwards
+- dagster: Lesson 2.6 onwards
+- ooc: Lesson 2.7
+- kafka: Lesson 2.10
+
+The learner is advised to get the environments ready before each lesson as part of lesson preparations.
+
 ### Lesson Overview
 
 This lesson introduces the concept of big data and data engineering. It also introduces one of the most popular NoSQL databases- MongoDB, and how to perform CRUD operations.
