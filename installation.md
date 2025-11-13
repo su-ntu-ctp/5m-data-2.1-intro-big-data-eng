@@ -40,7 +40,7 @@ For lesson 2.1, you will need to setup MongoDB to demonstrate a NoSQL database.
 
 ### MongoDB
 
-- Setup [instructions](./assets/setup_MongoDB.pdf) for MongoDB. 
+- Setup [instructions](https://drive.google.com/file/d/1XeQ8FE_exsdhMOF5kOn2bqoovLs0i7bS/view?usp=drive_link) for MongoDB. 
 - [Video guide](https://drive.google.com/file/d/1lH2KBHvXollEsDCr1sCzFAAryE8-mnQy/view?usp=sharing) for setting up MongoDB.
 
 
@@ -49,12 +49,12 @@ For lesson 2.1, you will need to setup MongoDB to demonstrate a NoSQL database.
 For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud Platform (GCP).
 
 ### Redis
-- Setup [instructions](./assets/setup_Redis.pdf) for Redis.
+- Setup [instructions](https://drive.google.com/file/d/1n-DPX64e0WRH9nK58rL1Ig73wbtmI0ir/view?usp=drive_link) for Redis.
 - [Video guide](https://drive.google.com/file/d/1YRNs7ezKNp2GvMBJxE8BuphRnjRIdJI-/view?usp=drive_link) for setting up Redis.
 
 ### GCP
 
-- Setup [instructions](./assets/setup_GCP.pdf) for GCP account.
+- Setup [instructions](https://drive.google.com/file/d/1UlqE8E9si7ATKmj0mJn4zj4NMvOQODXa/view?usp=sharing) for GCP account.
 - [Video guide](https://drive.google.com/file/d/1JaORL_1Lhmf-Xjp88o3Icw4L5ienJ2Ph/view?usp=drive_link) for setting up GCP Account.
 - [Video guide](https://drive.google.com/file/d/1miz5Mp5cpo3KTvrXVwPoAc40ba3tUo2Q/view?usp=drive_link) for installing gcloud CLI.
 
