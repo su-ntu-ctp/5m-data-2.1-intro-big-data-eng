@@ -1,18 +1,5 @@
 # Module 2 First-Time Software Installation
 
-## Hardware Requirements
-- Desktop/laptop computer running the latest version of macOS/Linux/Windows operating system (OS)
-- Recommended 16GB onboard memory (RAM) 
-- Recommended 50GB available hard disk storage space (HDD/SSD)
-- Webcam and microphone for online Zoom sessions
-
-## Software Requirements
-
-- WSL (for Windows users only)
-- Visual Studio Code (VSCode) or any source code editor
-- Git Command-Line Interface (CLI)
-- Conda/Miniconda
-
 ## Conda Environments
 
 Install conda environments required for the rest of module. Go to the `environments` folder and create the conda environments based on the `environment.yml` file. Each `yml` file is prefixed with the environment name. 
@@ -46,3 +33,30 @@ If you get an error message when creating the `bde` environment, e.g.
 Run the following CLI command from your terminal:
 
 `sudo apt install build-essential`
+
+## Preparation for Lesson 2.1
+
+For lesson 2.1, you will need to setup MongoDB to demonstrate a NoSQL database.
+
+### MongoDB
+
+- Setup [instructions](./assets/setup_MongoDB.pdf) for MongoDB. 
+- [Video guide](https://drive.google.com/file/d/1lH2KBHvXollEsDCr1sCzFAAryE8-mnQy/view?usp=sharing) for setting up MongoDB.
+
+
+## Preparation for Lesson 2.2
+
+For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud Platform (GCP).
+
+### Redis
+- Setup [instructions](./assets/setup_Redis.pdf) for Redis.
+- [Video guide](https://drive.google.com/file/d/1YRNs7ezKNp2GvMBJxE8BuphRnjRIdJI-/view?usp=drive_link) for setting up Redis.
+
+### GCP
+
+- Setup [instructions](./assets/setup_GCP.pdf) for GCP account.
+- [Video guide](https://drive.google.com/file/d/1JaORL_1Lhmf-Xjp88o3Icw4L5ienJ2Ph/view?usp=drive_link) for setting up GCP Account.
+- [Video guide](https://drive.google.com/file/d/1miz5Mp5cpo3KTvrXVwPoAc40ba3tUo2Q/view?usp=drive_link) for installing gcloud CLI.
+
+
+
