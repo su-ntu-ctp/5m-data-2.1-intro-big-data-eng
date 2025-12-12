@@ -77,10 +77,12 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 - Github token prepared in lesson 2.3
 - GCP service account key (json file) prepared in lesson 2.2. Place teh file in the home folder and copy the path. WSL user, use VS Code to copy path. DO NOT USE WINDOWS EXPLORER.
 
-### Dagster Requirement
+### Dagster Requirement (Optional)
 - `dagster` environment
 
 ## Preparation for Lesson 2.7
+
+
 
 ## Preparation for Lesson 2.10
 
