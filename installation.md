@@ -85,4 +85,8 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 ## Preparation for Lesson 2.10
 
 ### Docker Setup
+The learner is first requested to install docker via this link before running the below commands: 
+- Windows users: https://docs.docker.com/desktop/setup/install/windows-install/
+- Mac users: https://docs.docker.com/desktop/setup/install/mac-install/
 
+> WSL user can install the Windows version. You need not install docker in your wsl environment.
