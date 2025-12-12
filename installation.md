@@ -59,4 +59,30 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 - [Video guide](https://drive.google.com/file/d/1miz5Mp5cpo3KTvrXVwPoAc40ba3tUo2Q/view?usp=drive_link) for installing gcloud CLI.
 
 
+## Preparation for Lesson 2.3
+
+### Guthib Token Setup
+
+## Preparation for Lesson 2.5
+
+### dbt Requirements
+- `elt` environment
+- Github token prepared in lesson 2.3
+- GCP setup prepared in lesson 2.2
+
+## Preparation for Lesson 2.6
+
+### Meltano Requirements
+- `elt` environment
+- Github token prepared in lesson 2.3
+- GCP service account key (json file) prepared in lesson 2.2. Place teh file in the home folder and copy the path. WSL user, use VS Code to copy path. DO NOT USE WINDOWS EXPLORER.
+
+### Dagster Requirement
+- `dagster` environment
+
+## Preparation for Lesson 2.7
+
+## Preparation for Lesson 2.10
+
+### Docker Setup
 
