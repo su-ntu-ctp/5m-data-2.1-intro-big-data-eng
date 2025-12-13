@@ -62,6 +62,7 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 ## Preparation for Lesson 2.3
 
 ### Guthib Token Setup
+- Setup [instructions](https://drive.google.com/file/d/1jbYWTyVWoKPofnItN-38Xe-8dvbJcV4R/view?usp=sharing) to extract Github token.
 
 ## Preparation for Lesson 2.5
 
@@ -82,6 +83,15 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 
 ## Preparation for Lesson 2.7
 
+### Great Expectations Requirements
+- `elt` environment
+
+## Preparation for Lesson 2.8
+- `ooc` environment
+- We need to download large amount of data. Suggest learner to run the notebook and download the data first.
+ 
+
+## Preparation for Lesson 2.9
 
 
 ## Preparation for Lesson 2.10

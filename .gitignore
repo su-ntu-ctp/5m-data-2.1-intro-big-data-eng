@@ -1,3 +1,4 @@
 solutions/
 .DS_Store
 .ipynb_checkpoints/
+.env
