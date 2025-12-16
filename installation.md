@@ -2,9 +2,9 @@
 
 ## Conda Environments
 
-Install conda environments required for the rest of module. Go to the `environments` folder and create the conda environments based on the `environment.yml` file. Each `yml` file is prefixed with the environment name. 
+Install conda environments required for the rest of module. Go to the `environments` folder and then go to `python_3_11` folder; create the conda environments based on the `environment.yml` file. Each `yml` file is prefixed with the environment name. 
 
-For example, to create the `bde` environment, first navigate into the `environments` folder by running `cd environments`, then run the following command:
+For example, to create the `bde` environment, first navigate into the `environments/python_3_11` by running `cd environments/python_3_11`, then run the following command:
 
 `conda env create --file bde-environment.yml`
 
@@ -14,7 +14,7 @@ To replace an existing environment:
 
 ### Environments
 
-Create all the environments in the `environments` folder at this point. 
+Create all the environments in the `environments/python_3_11` folder at this point. 
 
 Here is where the environments will be used:
 - `bde`: Lesson 2.1 onwards
@@ -40,7 +40,7 @@ For lesson 2.1, you will need to setup MongoDB to demonstrate a NoSQL database.
 
 ### MongoDB
 
-- Setup [instructions](https://drive.google.com/file/d/1XeQ8FE_exsdhMOF5kOn2bqoovLs0i7bS/view?usp=drive_link) for MongoDB. 
+- Setup [instructions](https://drive.google.com/file/d/1pMF-6O-TilA4wEhwng0k2sZ8TUpoKVil/view?usp=sharing) for MongoDB. 
 - [Video guide](https://drive.google.com/file/d/1lH2KBHvXollEsDCr1sCzFAAryE8-mnQy/view?usp=sharing) for setting up MongoDB.
 
 
