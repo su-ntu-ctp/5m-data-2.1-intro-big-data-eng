@@ -59,10 +59,11 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 - [Video guide](https://drive.google.com/file/d/1miz5Mp5cpo3KTvrXVwPoAc40ba3tUo2Q/view?usp=drive_link) for installing gcloud CLI.
 
 
-## Preparation for Lesson 2.3
+## Preparation for Lesson 2.4
 
 ### Guthib Token Setup
 - Setup [instructions](https://drive.google.com/file/d/1jbYWTyVWoKPofnItN-38Xe-8dvbJcV4R/view?usp=sharing) to extract Github token.
+
 
 ## Preparation for Lesson 2.5
 
