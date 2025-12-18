@@ -1,18 +1,18 @@
 name: elt
 channels:
-  - conda-forge
   - defaults
+  - conda-forge
 dependencies:
   - dbt-bigquery=1.10.3
-  - dbt-core=1.10.15
-  - great-expectations=1.9.3
-  - matplotlib=3.10.8
-  - pandas=2.1.4
+  - great-expectations=1.8.0
+  - ipykernel=7.1.0
+  - matplotlib=3.10.7
+  - pandas=2.3.3
   - pip=25.3
   - pytest=8.4.2
   - python=3.11.14
   - python-dotenv=1.1.0
   - requests=2.32.5
   - pip:
-      - meltano==4.0.7
+      - meltano==4.0.8
 prefix: /home/ds2/miniconda3/envs/elt
