@@ -36,6 +36,8 @@ Run the following CLI command from your terminal:
 
 ## Preparation for Lesson 2.1
 
+- `bde` environment
+
 For lesson 2.1, you will need to setup MongoDB to demonstrate a NoSQL database.
 
 ### MongoDB
@@ -45,6 +47,8 @@ For lesson 2.1, you will need to setup MongoDB to demonstrate a NoSQL database.
 
 
 ## Preparation for Lesson 2.2
+
+- `bde` environment
 
 For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud Platform (GCP).
 
@@ -59,7 +63,16 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 - [Video guide](https://drive.google.com/file/d/1miz5Mp5cpo3KTvrXVwPoAc40ba3tUo2Q/view?usp=drive_link) for installing gcloud CLI.
 
 
+## Preparation for Lesson 2.3
+
+- `bde` environment
+
+
 ## Preparation for Lesson 2.4
+
+- `bde` environment
+
+For lesson 2.4 we need to setup a Github token.
 
 ### Guthib Token Setup
 - Setup [instructions](https://drive.google.com/file/d/1jbYWTyVWoKPofnItN-38Xe-8dvbJcV4R/view?usp=sharing) to extract Github token.
@@ -72,34 +85,49 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 - Github token prepared in lesson 2.3
 - GCP setup prepared in lesson 2.2
 
+
 ## Preparation for Lesson 2.6
 
 ### Meltano Requirements
 - `elt` environment
 - Github token prepared in lesson 2.3
-- GCP service account key (json file) prepared in lesson 2.2. Place teh file in the home folder and copy the path. WSL user, use VS Code to copy path. DO NOT USE WINDOWS EXPLORER.
+- GCP service account key (json file) prepared in lesson 2.2. Place the file in the home folder and copy the path. WSL user, use VS Code to copy path. DO NOT USE WINDOWS EXPLORER.
 
 ### Dagster Requirement (Optional)
 - `dagster` environment
+
 
 ## Preparation for Lesson 2.7
 
 ### Great Expectations Requirements
 - `elt` environment
 
+### Dagster Requirement (Optional)
+- `dagster` environment
+
+
 ## Preparation for Lesson 2.8
 - `ooc` environment
-- We need to download large amount of data. Suggest learner to run the notebook and download the data first.
+- We need to download large amount of data more than 1GB. Suggest learner to run the notebook and download the data first.
  
 
 ## Preparation for Lesson 2.9
+- We will be using Google Colab, no environment required.
 
 
 ## Preparation for Lesson 2.10
 
-### Docker Setup
+- `kafka` environment
+
 The learner is first requested to install docker via this link before running the below commands: 
+
+### Docker Setup
 - Windows users: https://docs.docker.com/desktop/setup/install/windows-install/
 - Mac users: https://docs.docker.com/desktop/setup/install/mac-install/
 
 > WSL user can install the Windows version. You need not install docker in your wsl environment.
+
+### Docker Launch
+- We will launch docker image from the terminal in Docker app.
+
+> WSL user can use Windows command prompt to run the docker command.
