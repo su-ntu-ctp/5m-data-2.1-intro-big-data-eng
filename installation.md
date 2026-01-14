@@ -2,9 +2,9 @@
 
 ## Conda Environments
 
-Install conda environments required for the rest of module. Go to the `environments` folder and create the conda environments based on the `environment.yml` file. Each `yml` file is prefixed with the environment name. 
+Install conda environments required for the rest of module. Go to the `environments` folder and then go to `python_3_11` folder; create the conda environments based on the `environment.yml` file. Each `yml` file is prefixed with the environment name. 
 
-For example, to create the `bde` environment, first navigate into the `environments` folder by running `cd environments`, then run the following command:
+For example, to create the `bde` environment, first navigate into the `environments/python_3_11` by running `cd environments/python_3_11`, then run the following command:
 
 `conda env create --file bde-environment.yml`
 
@@ -14,7 +14,7 @@ To replace an existing environment:
 
 ### Environments
 
-Create all the environments in the `environments` folder at this point. 
+Create all the environments in the `environments/python_3_11` folder at this point. 
 
 Here is where the environments will be used:
 - `bde`: Lesson 2.1 onwards
@@ -36,15 +36,19 @@ Run the following CLI command from your terminal:
 
 ## Preparation for Lesson 2.1
 
+- `bde` environment
+
 For lesson 2.1, you will need to setup MongoDB to demonstrate a NoSQL database.
 
 ### MongoDB
 
-- Setup [instructions](https://drive.google.com/file/d/1XeQ8FE_exsdhMOF5kOn2bqoovLs0i7bS/view?usp=drive_link) for MongoDB. 
+- Setup [instructions](https://drive.google.com/file/d/1pMF-6O-TilA4wEhwng0k2sZ8TUpoKVil/view?usp=sharing) for MongoDB. 
 - [Video guide](https://drive.google.com/file/d/1lH2KBHvXollEsDCr1sCzFAAryE8-mnQy/view?usp=sharing) for setting up MongoDB.
 
 
 ## Preparation for Lesson 2.2
+
+- `bde` environment
 
 For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud Platform (GCP).
 
@@ -61,7 +65,18 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 
 ## Preparation for Lesson 2.3
 
+- `bde` environment
+
+
+## Preparation for Lesson 2.4
+
+- `bde` environment
+
+For lesson 2.4 we need to setup a Github token.
+
 ### Guthib Token Setup
+- Setup [instructions](https://drive.google.com/file/d/1jbYWTyVWoKPofnItN-38Xe-8dvbJcV4R/view?usp=sharing) to extract Github token.
+
 
 ## Preparation for Lesson 2.5
 
@@ -70,23 +85,49 @@ For lesson 2.2, you will need to setup user accounts on Redis and Google Cloud P
 - Github token prepared in lesson 2.3
 - GCP setup prepared in lesson 2.2
 
+
 ## Preparation for Lesson 2.6
 
 ### Meltano Requirements
 - `elt` environment
 - Github token prepared in lesson 2.3
-- GCP service account key (json file) prepared in lesson 2.2. Place teh file in the home folder and copy the path. WSL user, use VS Code to copy path. DO NOT USE WINDOWS EXPLORER.
+- GCP service account key (json file) prepared in lesson 2.2. Place the file in the home folder and copy the path. WSL user, use VS Code to copy path. DO NOT USE WINDOWS EXPLORER.
 
-### Dagster Requirement
+### Dagster Requirement (Optional)
 - `dagster` environment
+
 
 ## Preparation for Lesson 2.7
 
+### Great Expectations Requirements
+- `elt` environment
+
+### Dagster Requirement (Optional)
+- `dagster` environment
+
+
+## Preparation for Lesson 2.8
+- `ooc` environment
+- We need to download large amount of data more than 1GB. Suggest learner to run the notebook and download the data first.
+ 
+
+## Preparation for Lesson 2.9
+- We will be using Google Colab, no environment required.
+
+
 ## Preparation for Lesson 2.10
 
-### Docker Setup
+- `kafka` environment
+
 The learner is first requested to install docker via this link before running the below commands: 
+
+### Docker Setup
 - Windows users: https://docs.docker.com/desktop/setup/install/windows-install/
 - Mac users: https://docs.docker.com/desktop/setup/install/mac-install/
 
 > WSL user can install the Windows version. You need not install docker in your wsl environment.
+
+### Docker Launch
+- We will launch docker image from the terminal in Docker app.
+
+> WSL user can use Windows command prompt to run the docker command.

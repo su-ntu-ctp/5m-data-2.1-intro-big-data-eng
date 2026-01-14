@@ -1,23 +1,21 @@
 name: dagster
 channels:
   - defaults
-  - https://repo.anaconda.com/pkgs/main
 dependencies:
-  - matplotlib=3.10.0
-  - pandas=2.2.3
-  - pip=25.1
-  - python=3.11.13
-  - requests=2.32.3
+  - matplotlib=3.10.7
+  - pandas=2.3.3
+  - pip=25.3
+  - python=3.11.14
+  - requests=2.32.5
   - pip:
-      - dagster==1.9.13
-      - dagster-dbt==0.25.13
-      - dagster-duckdb==0.25.13
-      - dagster-duckdb-pandas==0.25.13
-      - dagster-meltano==1.5.5
-      - dagster-webserver==1.9.13
-      - dbt-bigquery==1.9.2
-      - dbt-core==1.9.6
-      - duckdb==1.3.0
-      - meltano==3.7.8
-      - python-dotenv==1.1.0
-prefix: /opt/miniconda3/envs/d8
+      - dagster==1.12.8
+      - dagster-dbt==0.28.8
+      - dagster-duckdb==0.28.8
+      - dagster-duckdb-pandas==0.28.8
+      - dagster-webserver==1.12.8
+      - dbt-bigquery==1.11.0
+      - dbt-core==1.10.17
+      - duckdb==1.4.3
+      - meltano==4.0.8 
+      - python-dotenv==1.2.1
+prefix: /Users/ds0/miniconda3/envs/dagster

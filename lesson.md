@@ -4,7 +4,9 @@
 
 ### Preparation
 
-Please refer to the [installation.md](./installation.md) file for application setup instructions required for this module.
+- Please refer to the [installation.md](./installation.md) file for application setup instructions required for this module.
+
+- For this lesson, we also need to setup a MongoDB account. Please refer to [the setup instructions](./installation.md#preparation-for-lesson-21)
 
 ### Lesson Overview
 
