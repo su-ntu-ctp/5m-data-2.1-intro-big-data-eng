@@ -4,11 +4,10 @@
 
 Refer to the following markdown file for the respective sections of the class:
 
-- [Self Studies](./studies.md)
+- [Pre-Class](./pre-class.md)
 - [Lesson Preparation & Installation](./installation.md)
 - [Lesson](./lesson.md)
-- [Assignment](./assignment.md)
-- [Quiz](./quiz.md)
+- [Assignment](./assignment/assignment.ipynb)
 - [Reference](./reference.md)
 
 ## Lesson Objectives
