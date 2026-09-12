@@ -15,4 +15,4 @@ dependencies:
   - requests=2.32.5
   - pip:
       - meltano==4.0.8
-prefix: /home/ds2/miniconda3/envs/elt
+
