@@ -192,7 +192,7 @@ body {
                     <div class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">TESTED</div>
                     <div class="text-2xl mb-2">✅</div>
                     <div class="font-bold text-emerald-800">Orchestration</div>
-                    <div class="text-xs text-emerald-600 mt-1">Airflow & Verification</div>
+                    <div class="text-xs text-emerald-600 mt-1">Dagster & Verification</div>
                 </div>
             </div>
             <p class="text-sm text-slate-500 mt-8 text-center">
@@ -231,7 +231,7 @@ body {
                         <span class="text-emerald-500 mr-3 text-xl">⚙️</span>
                         <div>
                             <strong class="text-slate-800 block">Self-Healing Pipelines</strong>
-                            <span class="text-sm text-slate-500">Orchestrators (Airflow/Prefect) intelligently retry failed jobs and alert stakeholders immediately.</span>
+                            <span class="text-sm text-slate-500">Dagster intelligently retries failed jobs and alerts stakeholders immediately.</span>
                         </div>
                     </li>
                 </ul>
@@ -245,7 +245,7 @@ body {
                 <span class="bg-orange-100 text-orange-700 p-2 rounded-lg text-xl">03</span> The Scale & Real-Time Engine
             </h2>
             <p class="mt-4 text-lg text-slate-600 max-w-4xl leading-relaxed">
-                Phase 5 represents the pinnacle of Data Engineering. When data exceeds a single machine's RAM, we utilize out-of-core computation. As volume grows to petabytes, we scale horizontally with Hadoop and Spark (Distributed Batch). Finally, to power instantaneous dashboards, we transition to low-latency Distributed Streaming using Kafka and Flink.
+                Phase 5 represents the pinnacle of Data Engineering. When data exceeds a single machine's RAM, we utilize out-of-core computation. As volume grows to petabytes, we scale horizontally with Hadoop and Spark (Distributed Batch). Finally, to power instantaneous dashboards, we transition to low-latency Distributed Streaming using Kafka and Spark Structured Streaming.
             </p>
         </div>
 
@@ -428,7 +428,7 @@ body {
         y: [0.1, 0.2, 0.5, 1.2],
         mode: 'markers',
         type: 'scattergl',
-        name: 'Distributed Stream (Kafka/Flink)',
+        name: 'Distributed Stream (Kafka/Spark)',
         marker: { size: 12, color: '#10b981', symbol: 'diamond', line: {width: 1, color: 'white'} }
     };
 
