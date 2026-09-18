@@ -1,459 +1,607 @@
-<!--
-Palette: Vibrant Tech Blues & Energetic Accents (#0284C7, #EA580C, #8B5CF6, #10B981)
-NO MERMAID JS OR SVG WERE USED IN THIS OUTPUT. ALL RENDERINGS ARE CANVAS, WEBGL, OR HTML/CSS.
-
-Plan Summary:
-- Intro: High-level metrics and scope.
-- Phase 1 & 2 (Blueprint/Input): Donut chart for curriculum distribution; Bar chart comparing Row vs Columnar storage.
-- Phase 3 & 4 (Vault/Factory): CSS-based pipeline flow; Radar chart for data quality metrics.
-- Phase 5 (Scale): Plotly WebGL Scatter plot demonstrating data volume vs processing latency across compute paradigms.
-
-Visualization Choices:
-1. Donut Chart (Chart.js) -> Goal: Compare -> Shows proportion of curriculum dedicated to each phase.
-2. Bar Chart (Chart.js) -> Goal: Compare -> Contrasts read/write efficiency of row vs columnar formats.
-3. CSS Flow Diagram -> Goal: Organize -> Illustrates the linear progression of a data pipeline without SVG/Mermaid.
-4. Radar Chart (Chart.js) -> Goal: Relationships -> Maps the multi-dimensional impact of orchestration and testing.
-5. Scatter Plot (Plotly WebGL) -> Goal: Relationships/Change -> Maps computation types against volume and latency.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Big Data Engineering Roadmap</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<title>Introduction to Big Data Engineering — NTU SCTP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-body {
-    background-color: #f0fdfa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #1e293b;
-}
-.chart-container {
+  :root {
+    --ntu-navy:         #1B2A4A;
+    --ntu-dark:         #1E3054;
+    --ntu-blue:         #2C5697;
+    --ntu-blue-light:   #3D6DB5;
+    --ntu-crimson:      #C8102E;
+    --ntu-crimson-dark: #A50D26;
+
+    --bg:           #FFFFFF;
+    --bg-off:       #F4F5F7;
+    --border:       #DDE1E6;
+    --border-light: #E8EAED;
+    --text:         #1B2A4A;
+    --text-body:    #333D4D;
+    --text-dim:     #5F6B7A;
+    --text-light:   #8C95A1;
+
+    --c-data:  #2C5697;
+    --c-unsup: #6B4C9A;
+    --c-nlp:   #0E7490;
+    --c-nn:    #B45309;
+    --c-vec:   #1A7A5C;
+    --c-knn:   #BE123C;
+    --c-sup:   #C2410C;
+    --c-llm:   #C8102E;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    background: var(--bg);
+  }
+  h1, h2, h3, h4 { color: var(--text); line-height: 1.25; margin: 0 0 0.6em; }
+  p { margin: 0 0 1em; }
+  img { max-width: 100%; display: block; }
+  a { color: var(--ntu-blue); }
+  code { background: var(--bg-off); border-radius: 3px; padding: 0.1em 0.4em; font-size: 0.9em; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: var(--ntu-navy);
+    color: white;
+    padding: 3rem 2.5rem;
+    border-bottom: 6px solid var(--ntu-crimson);
+  }
+  .hero-inner { max-width: 880px; margin: 0 auto; width: 100%; }
+  .programme-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-weight: 300;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 strong { color: var(--ntu-crimson); font-weight: 700; }
+  .hero .subtitle { color: rgba(255,255,255,0.6); font-size: 1.05rem; max-width: 640px; }
+  .hero .scroll-hint {
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* ---------- Section dividers ---------- */
+  .section-header {
+    background: var(--ntu-navy);
+    border-bottom: 5px solid var(--ntu-crimson);
+    color: white;
+    padding: 2rem 2.5rem;
+  }
+  .section-header .wrap { padding: 0; }
+  .section-header .tag {
+    background: rgba(255,255,255,0.12);
+    color: white;
+  }
+  .section-header h2 {
+    color: white;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin: 0.5rem 0 0;
+  }
+  .section-header h2 strong { color: var(--ntu-crimson); font-weight: 700; }
+
+  section.content { padding: 2.5rem 0 3rem; }
+  section.content .wrap { padding: 0 2.5rem; }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Tags ---------- */
+  .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25em 0.7em;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--module-color, var(--ntu-blue)) 14%, transparent);
+    color: var(--module-color, var(--ntu-blue));
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    border-left: 4px solid var(--ntu-crimson);
+    background: var(--bg-off);
+    padding: 1.1rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+    margin: 1.5rem 0;
+  }
+  .callout .label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ntu-crimson);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  /* ---------- Cards ---------- */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card {
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--ntu-blue);
+    border-radius: 4px;
+    padding: 1.4rem;
+    background: var(--bg);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .card:hover { transform: scale(1.02); }
+  .card h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.92rem; color: var(--text-body); margin-bottom: 0; }
+
+  /* ---------- Tables ---------- */
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.92rem; }
+  th, td { border: 1px solid var(--border); padding: 0.7rem 0.9rem; text-align: left; vertical-align: top; }
+  th { background: var(--bg-off); color: var(--text); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ---------- Tabs ---------- */
+  .tabs { display: flex; gap: 0.5rem; margin: 1.5rem 0 0; flex-wrap: wrap; }
+  .tab-btn {
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.65rem 1.1rem;
+    border: 1px solid var(--border);
+    background: var(--bg-off);
+    color: var(--text-dim);
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active { background: var(--ntu-navy); color: white; border-color: var(--ntu-navy); }
+  .tab-panel { display: none; border: 1px solid var(--border); border-radius: 0 4px 4px 4px; padding: 1.5rem; background: var(--bg); }
+  .tab-panel.active { display: block; }
+  .tab-panel .meta-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+
+  /* ---------- Sorter / match quiz ---------- */
+  .sorter { margin: 1.5rem 0; }
+  .sorter-items { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.2rem; }
+  .sorter-item {
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .sorter-item:hover { border-color: var(--ntu-blue); }
+  .sorter-item.correct { background: color-mix(in srgb, #1A7A5C 14%, transparent); border-color: #1A7A5C; color: #1A7A5C; }
+  .sorter-item.wrong { background: color-mix(in srgb, var(--ntu-crimson) 14%, transparent); border-color: var(--ntu-crimson); color: var(--ntu-crimson-dark); }
+  .sorter-targets { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem; }
+  .sorter-target {
+    border: 2px dashed var(--border);
+    border-radius: 4px;
+    padding: 0.9rem;
+    min-height: 70px;
+    font-size: 0.85rem;
+  }
+  .sorter-target strong { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); margin-bottom: 0.4rem; }
+  .sorter-feedback { margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-dim); min-height: 1.4em; }
+
+  /* ---------- V's picker ---------- */
+  .v-picker { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1.5rem 0 1rem; }
+  .v-node {
+    flex: 1 1 90px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    padding: 0.9rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--bg);
+  }
+  .v-node .letter { font-size: 1.5rem; font-weight: 700; color: var(--ntu-blue); }
+  .v-node .full { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
+  .v-node.active { border-color: var(--ntu-crimson); background: color-mix(in srgb, var(--ntu-crimson) 8%, transparent); }
+  .v-node.active .letter { color: var(--ntu-crimson); }
+  .v-result { border: 1px solid var(--border); border-radius: 4px; padding: 1.2rem 1.4rem; background: var(--bg-off); min-height: 70px; font-size: 0.9rem; }
+  .v-result strong { color: var(--text); }
+
+  /* ---------- Accordion ---------- */
+  .accordion-item { border: 1px solid var(--border); border-radius: 4px; margin-bottom: 0.6rem; overflow: hidden; }
+  .accordion-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.9rem 1.2rem; cursor: pointer; background: var(--bg-off);
+    font-weight: 700; font-size: 0.9rem;
+  }
+  .accordion-head .chevron { transition: transform 0.2s ease; color: var(--text-dim); }
+  .accordion-item.open .chevron { transform: rotate(90deg); }
+  .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 1.2rem; }
+  .accordion-item.open .accordion-body { max-height: 220px; padding: 0.9rem 1.2rem 1.1rem; }
+  .accordion-body p { font-size: 0.88rem; margin: 0.3em 0; }
+
+  /* ---------- Code block ---------- */
+  .code-block {
     position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 40vh;
-    max-height: 450px;
-    min-height: 300px;
-    overflow: hidden;
-}
-@media (min-width: 768px) {
-    .chart-container {
-        height: 50vh;
-    }
-}
-.glass-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 1rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
-}
-.gradient-text {
-    background: linear-gradient(90deg, #0284c7, #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.connector-line {
-    width: 4px;
-    background: linear-gradient(to bottom, #0284c7, #10b981);
-    margin: 0 auto;
-    height: 3rem;
-}
+    background: var(--bg-off);
+    border-left: 4px solid var(--ntu-blue);
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--text-body);
+  }
+  .code-block .lang {
+    position: absolute;
+    top: 0.5rem; right: 0.8rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ntu-blue);
+  }
+
+  /* ---------- Recap ---------- */
+  .recap-list { list-style: none; padding: 0; margin: 1.5rem 0; }
+  .recap-list li {
+    padding: 0.8rem 1rem 0.8rem 2.6rem;
+    position: relative;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.95rem;
+  }
+  .recap-list li:before {
+    content: '✓';
+    position: absolute; left: 0.8rem; color: var(--ntu-crimson); font-weight: 700;
+  }
+
+  footer { background: var(--bg-off); padding: 2.5rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+  footer a { color: var(--ntu-blue); }
+
+  @media (max-width: 600px) {
+    .wrap, section.content .wrap, .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+  }
 </style>
 </head>
-<body class="antialiased pb-20">
+<body>
 
-<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
-            <div class="text-xl font-bold text-sky-700">⚙️ SU-NTU-CTP Data Engineering</div>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                <a href="#foundations" class="hover:text-sky-600">Foundations</a>
-                <a href="#storage" class="hover:text-sky-600">Storage & Orchestration</a>
-                <a href="#scale" class="hover:text-sky-600">Computation Scale</a>
-            </div>
-        </div>
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="programme-label">NTU (SCTP) Advanced Professional Certificate — Data Engineering</div>
+    <h1>Introduction to <strong>Big Data Engineering</strong></h1>
+    <p class="subtitle">From reading and writing data with pandas, to building the plumbing that moves, stores, and serves it at scale — starting with a first look at NoSQL and MongoDB.</p>
+    <div class="scroll-hint">Scroll to begin ↓</div>
+  </div>
+</div>
+
+<!-- ============ SCENARIO ============ -->
+<section class="content">
+  <div class="wrap reveal">
+    <span class="tag">The Scenario</span>
+    <h2 style="margin-top:0.6rem;">Meet FreshCart</h2>
+    <p>You've just been hired as a <strong>Junior Data Engineer</strong> at FreshCart, a mid-sized e-commerce grocery company in Singapore. FreshCart generates data from a transactional PostgreSQL database, website and app event logs, third-party logistics APIs, marketing platforms, and customer reviews scraped from social media.</p>
+    <div class="callout">
+      <span class="label">Your manager, on day one</span>
+      "We have data everywhere, but nobody trusts the numbers in our dashboards. The marketing team pulls different figures from the data team. Our analysts spend 60% of their time cleaning spreadsheets. We need you to help us build a proper data platform."
     </div>
-</nav>
+    <p>Module 2 is the plumbing course — ten units, each adding a layer to the platform FreshCart needs. This unit lays the groundwork: what makes data "big," the lifecycle every data engineering system follows, and your first hands-on database beyond SQL.</p>
+    <img src="../assets/module-2-overiew.png" alt="Map of Module 2 units: sources, storage, ingestion, transformation, and serving, each tagged with the unit numbers that cover it" style="border:1px solid var(--border); border-radius:4px; margin-top:1rem;">
+  </div>
+</section>
 
-<header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-    <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
-        Mastering the <span class="gradient-text">Big Data</span> Lifecycle
-    </h1>
-    <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-        A comprehensive journey from understanding architectural blueprints to deploying distributed, real-time streaming systems. This roadmap transforms theoretical concepts into highly scalable data pipelines.
-    </p>
-    
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-        <div class="glass-card p-6 border-t-4 border-t-sky-500">
-            <div class="text-4xl">🏗️</div>
-            <div class="text-3xl font-bold text-slate-800 mt-2">5</div>
-            <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Core Phases</div>
-        </div>
-        <div class="glass-card p-6 border-t-4 border-t-orange-500">
-            <div class="text-4xl">📚</div>
-            <div class="text-3xl font-bold text-slate-800 mt-2">10</div>
-            <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Repositories</div>
-        </div>
-        <div class="glass-card p-6 border-t-4 border-t-purple-500">
-            <div class="text-4xl">🚀</div>
-            <div class="text-3xl font-bold text-slate-800 mt-2">Scale</div>
-            <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Petabytes</div>
-        </div>
-        <div class="glass-card p-6 border-t-4 border-t-emerald-500">
-            <div class="text-4xl">⚡</div>
-            <div class="text-3xl font-bold text-slate-800 mt-2">Stream</div>
-            <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Real-Time</div>
-        </div>
+<!-- ============ BIG DATA / 5 V's ============ -->
+<div class="section-header">
+  <div class="wrap">
+    <span class="tag">Concept 1</span>
+    <h2>What Makes Data <strong>"Big"</strong>?</h2>
+  </div>
+</div>
+<section class="content">
+  <div class="wrap reveal">
+    <p>"Big data" isn't just "a lot of data." It's data that breaks the tools you already know — a single spreadsheet, or even a single machine, can't handle it. Five properties (the "5 V's") describe why.</p>
+    <img src="../assets/big_data.jpeg" alt="Infographic: the world of data, showing volumes such as 2.9 million emails sent per second and 24 petabytes processed by Google per day" style="border:1px solid var(--border); border-radius:4px;">
+
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top:1.5rem;">Click a V to see what it means for FreshCart.</p>
+    <div class="v-picker" id="v-picker">
+      <div class="v-node" data-v="volume"><div class="letter">V</div><div class="full">Volume</div></div>
+      <div class="v-node" data-v="velocity"><div class="letter">V</div><div class="full">Velocity</div></div>
+      <div class="v-node" data-v="variety"><div class="letter">V</div><div class="full">Variety</div></div>
+      <div class="v-node" data-v="veracity"><div class="letter">V</div><div class="full">Veracity</div></div>
+      <div class="v-node" data-v="value"><div class="letter">V</div><div class="full">Value</div></div>
     </div>
-</header>
+    <div class="v-result" id="v-result">Click a property above to see FreshCart's version of it.</div>
+  </div>
+</section>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+<!-- ============ DATA SIZES ============ -->
+<div class="section-header">
+  <div class="wrap">
+    <span class="tag">Concept 2</span>
+    <h2>How Big Is <strong>Big</strong>?</h2>
+  </div>
+</div>
+<section class="content">
+  <div class="wrap reveal">
+    <p>Data size units scale by 1,024 at each step — a habit worth having before you hear a colleague casually mention "a few terabytes."</p>
+    <img src="../assets/data_storage_size.jpeg" alt="Data size scale from bit to exabyte, comparing each unit to a number of books" style="border:1px solid var(--border); border-radius:4px;">
+    <table>
+      <tr><th>Unit</th><th>Size</th><th>Roughly</th></tr>
+      <tr><td>Megabyte</td><td>1,024 KB</td><td>1 book</td></tr>
+      <tr><td>Gigabyte</td><td>1,024 MB</td><td>1,600 books</td></tr>
+      <tr><td>Terabyte</td><td>1,024 GB</td><td>1.6 million books</td></tr>
+      <tr><td>Petabyte</td><td>1,024 TB</td><td>160 million books</td></tr>
+      <tr><td>Exabyte</td><td>1,024 PB</td><td>1.6 trillion books</td></tr>
+    </table>
+    <div class="callout">
+      <span class="label">Where FreshCart sits</span>
+      FreshCart's order history is likely gigabytes to low terabytes — not "big data" by volume alone. But its variety (structured orders, JSON logs, unstructured reviews) and velocity (real-time delivery tracking) already demand tools beyond a single PostgreSQL instance and pandas.
+    </div>
+  </div>
+</section>
 
-    <section id="foundations" class="scroll-mt-24">
-        <div class="mb-10 text-center md:text-left">
-            <h2 class="text-3xl font-bold text-slate-800 flex items-center justify-center md:justify-start gap-3">
-                <span class="bg-sky-100 text-sky-700 p-2 rounded-lg text-xl">01</span> The Blueprint & Input
-            </h2>
-            <p class="mt-4 text-lg text-slate-600 max-w-4xl leading-relaxed">
-                Before writing code, a Data Engineer must understand the ecosystem. Phase 1 defines system architectures like Lambda and Kappa, establishing the flow from source to consumption. Phase 2 dives into the mechanics of data acquisition and the critical choice of serialization formats, fundamentally impacting storage and query costs.
-            </p>
-        </div>
+<!-- ============ DE LIFECYCLE ============ -->
+<div class="section-header">
+  <div class="wrap">
+    <span class="tag">Concept 3</span>
+    <h2>The Data Engineering <strong>Lifecycle</strong></h2>
+  </div>
+</div>
+<section class="content">
+  <div class="wrap reveal">
+    <p>Every data platform — FreshCart's included — moves data through the same core stages, with storage running underneath all of them.</p>
+    <img src="../assets/de_lifecycle.png" alt="Data engineering lifecycle diagram: generation feeds ingestion, transformation, and serving (with storage underneath), which then feed analytics, machine learning, and reverse ETL" style="border:1px solid var(--border); border-radius:4px;">
+    <div class="card-grid">
+      <div class="card" style="border-top-color:#B45309;">
+        <h4>Generation</h4>
+        <p>Data is created at the source — a checkout event, a delivery scan, a scraped review. This lesson's Part 1 &amp; 2 live here.</p>
+      </div>
+      <div class="card" style="border-top-color:#1A7A5C;">
+        <h4>Ingestion</h4>
+        <p>Moving data from where it's generated into the platform — covered from Unit 2.4 onward.</p>
+      </div>
+      <div class="card" style="border-top-color:#6B4C9A;">
+        <h4>Transformation</h4>
+        <p>Cleaning, validating, and reshaping raw data into something trustworthy — the direct fix for "nobody trusts the numbers."</p>
+      </div>
+      <div class="card" style="border-top-color:#2C5697;">
+        <h4>Serving</h4>
+        <p>Delivering trusted data to analytics, ML models, and dashboards — the payoff the rest of the module builds toward.</p>
+      </div>
+    </div>
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top:1rem;"><strong>Undercurrents</strong> run through every stage: security, data management, DataOps, data architecture, orchestration, and software engineering. Storage — where MongoDB fits — is one of them, and it's what the rest of this unit gets hands-on with.</p>
+  </div>
+</section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="glass-card p-8">
-                <h3 class="text-xl font-bold text-slate-800 mb-4 text-center">Curriculum Distribution</h3>
-                <div class="chart-container">
-                    <canvas id="curriculumChart"></canvas>
-                </div>
-                <p class="text-sm text-slate-500 mt-4 text-center">
-                    A breakdown of focus areas across the 10 course modules. Computation and scaling command the largest share, reflecting the complexity of distributed systems.
-                </p>
-            </div>
+<!-- ============ NOSQL TYPES ============ -->
+<div class="section-header">
+  <div class="wrap">
+    <span class="tag">Concept 4</span>
+    <h2>SQL vs <strong>NoSQL</strong></h2>
+  </div>
+</div>
+<section class="content">
+  <div class="wrap reveal">
+    <p>FreshCart's orders already live in a relational (SQL) database — rows, columns, fixed schema. Not everything fits that shape. NoSQL databases trade some of SQL's structure and consistency guarantees for flexibility and horizontal scale, and come in four common flavours.</p>
+    <img src="../assets/nosql_types.jpeg" alt="Four types of NoSQL database: key-value, column-based, graph-based, and document-based" style="border:1px solid var(--border); border-radius:4px;">
 
-            <div class="glass-card p-8">
-                <h3 class="text-xl font-bold text-slate-800 mb-4 text-center">Format Efficiency: Row vs. Columnar</h3>
-                <div class="chart-container">
-                    <canvas id="formatChart"></canvas>
-                </div>
-                <p class="text-sm text-slate-500 mt-4 text-center">
-                    Columnar formats (Parquet/Avro) dramatically outperform row-based formats (CSV/JSON) in analytical read speeds and compression, while row-based formats excel in fast transactional writes.
-                </p>
-            </div>
-        </div>
-    </section>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="keyvalue">Key-Value</button>
+      <button class="tab-btn" data-tab="column">Column-Based</button>
+      <button class="tab-btn" data-tab="graph">Graph-Based</button>
+      <button class="tab-btn" data-tab="document">Document-Based</button>
+    </div>
+    <div class="tab-panel active" id="panel-keyvalue">
+      <div class="meta-row"><span class="tag" style="--module-color:#2C5697">Simplest model</span><span class="tag" style="--module-color:#2C5697">O(1) lookups</span></div>
+      <p><strong>What it is:</strong> Every record is a unique key mapped to a value, like a giant dictionary. No querying by value — only by key.</p>
+      <p><strong>Good for:</strong> Session tokens, shopping cart contents, real-time inventory counts looked up by product ID. Example: Redis.</p>
+    </div>
+    <div class="tab-panel" id="panel-column">
+      <div class="meta-row"><span class="tag" style="--module-color:#1A7A5C">Wide-column</span><span class="tag" style="--module-color:#1A7A5C">Analytics-friendly</span></div>
+      <p><strong>What it is:</strong> Data is grouped and stored by column rather than by row, so scanning and aggregating one field across millions of records is fast.</p>
+      <p><strong>Good for:</strong> Sales analytics rolled up across huge volumes — total revenue per SKU per day. Example: Apache HBase, Cassandra.</p>
+    </div>
+    <div class="tab-panel" id="panel-graph">
+      <div class="meta-row"><span class="tag" style="--module-color:#6B4C9A">Relationships-first</span><span class="tag" style="--module-color:#6B4C9A">Traversal queries</span></div>
+      <p><strong>What it is:</strong> Data is stored as nodes and the edges connecting them, making "how are these two things related" a fast, native query.</p>
+      <p><strong>Good for:</strong> "Customers who bought X also bought Y" recommendation engines. Example: Neo4j.</p>
+    </div>
+    <div class="tab-panel" id="panel-document">
+      <div class="meta-row"><span class="tag" style="--module-color:#C8102E">Flexible schema</span><span class="tag" style="--module-color:#C8102E">This lesson's tool</span></div>
+      <p><strong>What it is:</strong> Each record is a self-contained JSON-like document — fields can nest and vary between documents, no fixed schema required.</p>
+      <p><strong>Good for:</strong> FreshCart's scraped customer reviews and product catalogues, where fields differ from item to item. Example: MongoDB.</p>
+    </div>
 
-    <section id="storage" class="scroll-mt-24">
-        <div class="mb-10 text-center md:text-left">
-            <h2 class="text-3xl font-bold text-slate-800 flex items-center justify-center md:justify-start gap-3">
-                <span class="bg-purple-100 text-purple-700 p-2 rounded-lg text-xl">02</span> The Vault & Factory
-            </h2>
-            <p class="mt-4 text-lg text-slate-600 max-w-4xl leading-relaxed">
-                With data ingested, Phase 3 structures it into a Data Warehouse using OLAP concepts and dimensional modeling. Phase 4 automates this flow. By utilizing DAGs for orchestration and implementing robust data quality checks, pipelines transform from manual scripts into self-healing, reliable automated factories.
-            </p>
-        </div>
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top:1.5rem;">Match each FreshCart use case to the NoSQL type that fits best.</p>
+    <div class="sorter" id="sorter">
+      <div class="sorter-items" id="sorter-items">
+        <button class="sorter-item" data-answer="keyvalue">Look up current stock count by product ID</button>
+        <button class="sorter-item" data-answer="column">Aggregate revenue per SKU across a year of orders</button>
+        <button class="sorter-item" data-answer="graph">Power "customers who bought this also bought"</button>
+        <button class="sorter-item" data-answer="document">Store scraped reviews with inconsistent fields</button>
+      </div>
+      <div class="sorter-targets">
+        <div class="sorter-target" data-target="keyvalue"><strong>Key-Value</strong>lookup by key only</div>
+        <div class="sorter-target" data-target="column"><strong>Column-Based</strong>fast column aggregation</div>
+        <div class="sorter-target" data-target="graph"><strong>Graph-Based</strong>relationships between records</div>
+        <div class="sorter-target" data-target="document"><strong>Document-Based</strong>flexible, nested fields</div>
+      </div>
+      <div class="sorter-feedback" id="sorter-feedback">Select a use case above, then a database type below.</div>
+    </div>
 
-        <div class="glass-card p-8 mb-12">
-            <h3 class="text-xl font-bold text-slate-800 mb-8 text-center">The Automated Data Pipeline Flow</h3>
-            
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full px-4">
-                <div class="bg-sky-50 border-2 border-sky-400 rounded-xl p-6 w-full md:w-1/4 text-center shadow-sm">
-                    <div class="text-2xl mb-2">🌐</div>
-                    <div class="font-bold text-sky-800">Extraction</div>
-                    <div class="text-xs text-sky-600 mt-1">APIs & Web Scraping</div>
-                </div>
-                
-                <div class="hidden md:block text-2xl text-slate-300">➡️</div>
-                <div class="md:hidden text-2xl text-slate-300 rotate-90 my-2">➡️</div>
-                
-                <div class="bg-orange-50 border-2 border-orange-400 rounded-xl p-6 w-full md:w-1/4 text-center shadow-sm">
-                    <div class="text-2xl mb-2">📦</div>
-                    <div class="font-bold text-orange-800">Encoding</div>
-                    <div class="text-xs text-orange-600 mt-1">Parquet Conversion</div>
-                </div>
-                
-                <div class="hidden md:block text-2xl text-slate-300">➡️</div>
-                <div class="md:hidden text-2xl text-slate-300 rotate-90 my-2">➡️</div>
-                
-                <div class="bg-purple-50 border-2 border-purple-400 rounded-xl p-6 w-full md:w-1/4 text-center shadow-sm">
-                    <div class="text-2xl mb-2">🏛️</div>
-                    <div class="font-bold text-purple-800">Warehousing</div>
-                    <div class="text-xs text-purple-600 mt-1">OLAP Schemas</div>
-                </div>
-                
-                <div class="hidden md:block text-2xl text-slate-300">➡️</div>
-                <div class="md:hidden text-2xl text-slate-300 rotate-90 my-2">➡️</div>
-                
-                <div class="bg-emerald-50 border-2 border-emerald-400 rounded-xl p-6 w-full md:w-1/4 text-center shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">TESTED</div>
-                    <div class="text-2xl mb-2">✅</div>
-                    <div class="font-bold text-emerald-800">Orchestration</div>
-                    <div class="text-xs text-emerald-600 mt-1">Dagster & Verification</div>
-                </div>
-            </div>
-            <p class="text-sm text-slate-500 mt-8 text-center">
-                Logical progression from raw acquisition to a validated, warehouse-ready state, orchestrated automatically without manual intervention.
-            </p>
-        </div>
+    <div class="callout" style="margin-top:1.5rem;">
+      <span class="label">Looking ahead</span>
+      Every NoSQL database above makes a different trade-off between consistency and availability when a network partition happens — that's the <strong>CAP theorem</strong>, and it's the subject of Unit 2.2's Data Architecture lesson.
+    </div>
+  </div>
+</section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div class="glass-card p-8">
-                <h3 class="text-xl font-bold text-slate-800 mb-4 text-center">Impact of Automated Testing</h3>
-                <div class="chart-container">
-                    <canvas id="testingChart"></canvas>
-                </div>
-            </div>
-            <div>
-                <h4 class="text-2xl font-bold text-slate-800 mb-4">Quality Control Layer</h4>
-                <p class="text-slate-600 mb-4 leading-relaxed">
-                    Module 2.7 introduces a critical paradigm shift: treating data with the same rigor as software code.
-                </p>
-                <ul class="space-y-4">
-                    <li class="flex items-start">
-                        <span class="text-emerald-500 mr-3 text-xl">🛡️</span>
-                        <div>
-                            <strong class="text-slate-800 block">Unit Tests for Data</strong>
-                            <span class="text-sm text-slate-500">Preventing logical errors in transformations before they corrupt the warehouse.</span>
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-emerald-500 mr-3 text-xl">📊</span>
-                        <div>
-                            <strong class="text-slate-800 block">Great Expectations</strong>
-                            <span class="text-sm text-slate-500">Defining strict bounds for data distributions, null rates, and categorical constraints.</span>
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-emerald-500 mr-3 text-xl">⚙️</span>
-                        <div>
-                            <strong class="text-slate-800 block">Self-Healing Pipelines</strong>
-                            <span class="text-sm text-slate-500">Dagster intelligently retries failed jobs and alerts stakeholders immediately.</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<!-- ============ HANDS-ON: MONGODB ============ -->
+<div class="section-header">
+  <div class="wrap">
+    <span class="tag">Hands-on Tool</span>
+    <h2>MongoDB &amp; <strong>pymongo</strong></h2>
+  </div>
+</div>
+<section class="content">
+  <div class="wrap reveal">
+    <p>MongoDB is a document-oriented NoSQL database — data is stored as JSON-like documents inside collections, the rough equivalent of tables. This lesson's notebook connects to a MongoDB Atlas cluster with <code>pymongo</code> and runs CRUD operations against a sample movies dataset.</p>
 
-    <section id="scale" class="scroll-mt-24">
-        <div class="mb-10 text-center md:text-left">
-            <h2 class="text-3xl font-bold text-slate-800 flex items-center justify-center md:justify-start gap-3">
-                <span class="bg-orange-100 text-orange-700 p-2 rounded-lg text-xl">03</span> The Scale & Real-Time Engine
-            </h2>
-            <p class="mt-4 text-lg text-slate-600 max-w-4xl leading-relaxed">
-                Phase 5 represents the pinnacle of Data Engineering. When data exceeds a single machine's RAM, we utilize out-of-core computation. As volume grows to petabytes, we scale horizontally with Hadoop and Spark (Distributed Batch). Finally, to power instantaneous dashboards, we transition to low-latency Distributed Streaming using Kafka and Spark Structured Streaming.
-            </p>
-        </div>
+    <div class="card-grid">
+      <div class="card" style="border-top-color:#1A7A5C;">
+        <h4>Create</h4>
+        <p>Insert new documents into a collection with <code>insert_one()</code> or <code>insert_many()</code>.</p>
+      </div>
+      <div class="card" style="border-top-color:#2C5697;">
+        <h4>Read</h4>
+        <p><code>find_one()</code> returns a single document; <code>find()</code> returns a cursor over all matches, filterable with query operators like <code>$gt</code> and <code>$regex</code>.</p>
+      </div>
+      <div class="card" style="border-top-color:#B45309;">
+        <h4>Update</h4>
+        <p><code>update_one()</code> / <code>update_many()</code> modify fields on documents that match a filter, without replacing the whole document.</p>
+      </div>
+      <div class="card" style="border-top-color:#C8102E;">
+        <h4>Delete</h4>
+        <p><code>delete_one()</code> / <code>delete_many()</code> remove documents matching a filter.</p>
+      </div>
+    </div>
 
-        <div class="glass-card p-8 w-full">
-            <h3 class="text-xl font-bold text-slate-800 mb-2 text-center">Computation Evolution: Volume vs. Latency</h3>
-            <p class="text-sm text-slate-500 mb-6 text-center max-w-3xl mx-auto">
-                Comparing the three major scaling paradigms. Streaming offers millisecond latency but requires complex state management. Distributed Batch handles massive historical datasets but takes minutes to hours. Out-of-Core optimizes single-node resources for medium workloads.
-            </p>
-            <div class="chart-container h-[50vh] max-h-[500px]" id="plotly-scatter"></div>
-        </div>
-    </section>
+    <div class="code-block"><span class="lang">python</span>client = pymongo.MongoClient(uri)
+db = client["sample_mflix"]
+movies = db["movies"]
 
-</main>
+# Read: filter + query operator + sort
+cursor = (
+    movies.find({"released": {"$gt": datetime(2015, 12, 1)}})
+          .sort("released", 1)
+          .limit(5)
+)</div>
+
+    <h4 style="margin-top:2rem;">Aggregation Pipelines</h4>
+    <p>Beyond simple queries, MongoDB's <strong>aggregation pipeline</strong> chains stages like <code>$lookup</code> (join across collections), <code>$limit</code>, and <code>$sort</code> to reshape data — similar in spirit to a SQL <code>JOIN ... ORDER BY ... LIMIT</code>.</p>
+
+    <div class="callout">
+      <span class="label">Common pitfall</span>
+      MongoDB does <strong>not</strong> guarantee document order unless you explicitly add a <code>$sort</code> stage. A pipeline that applies <code>$limit</code> right after <code>$lookup</code>, with no sort in between, can return a different set of documents on every run — because "natural" storage order isn't fixed. Always sort before you limit.
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECAP ============ -->
+<div class="section-header">
+  <div class="wrap">
+    <span class="tag">Recap</span>
+    <h2>Key <strong>Takeaways</strong></h2>
+  </div>
+</div>
+<section class="content">
+  <div class="wrap reveal">
+    <ul class="recap-list">
+      <li>"Big data" is described by the 5 V's — Volume, Velocity, Variety, Veracity, Value — not size alone.</li>
+      <li>Data size units scale by 1,024: KB → MB → GB → TB → PB → EB.</li>
+      <li>The data engineering lifecycle runs Generation → Ingestion → Transformation → Serving, with Storage underneath and undercurrents (security, orchestration, DataOps...) throughout.</li>
+      <li>NoSQL databases trade SQL's fixed schema for flexibility: key-value, column-based, graph-based, and document-based are the four common types.</li>
+      <li>MongoDB is document-based; pymongo drives CRUD operations and aggregation pipelines against it.</li>
+      <li>Always add an explicit <code>$sort</code> before <code>$limit</code> in an aggregation — MongoDB does not guarantee document order otherwise.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>NTU (SCTP) Advanced Professional Certificate — Module 2.1 Introduction to Big Data Engineering</p>
+    <p>References: <a href="https://pymongo.readthedocs.io/en/stable/" target="_blank" rel="noopener">pymongo docs</a> · <a href="https://cheatography.com/mackan90096/cheat-sheets/json/" target="_blank" rel="noopener">JSON cheat sheet</a></p>
+  </div>
+</footer>
 
 <script>
-    function wrapLabel(label) {
-        if (label.length <= 16) return label;
-        const words = label.split(' ');
-        const lines = [];
-        let currentLine = '';
-        for (const word of words) {
-            if ((currentLine + word).length > 16) {
-                if (currentLine) lines.push(currentLine.trim());
-                currentLine = word + ' ';
-            } else {
-                currentLine += word + ' ';
-            }
-        }
-        if (currentLine) lines.push(currentLine.trim());
-        return lines;
-    }
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
 
-    const commonTooltipOptions = {
-        callbacks: {
-            title: function(tooltipItems) {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                if (Array.isArray(label)) {
-                  return label.join(' ');
-                } else {
-                  return label;
-                }
-            }
-        }
-    };
-
-    const phaseLabels = [
-        "Phase 1: Foundations", 
-        "Phase 2: Ingestion & Serialization", 
-        "Phase 3: Storage & Warehousing", 
-        "Phase 4: Orchestration & Testing", 
-        "Phase 5: Distributed Computation Scale"
-    ].map(wrapLabel);
-
-    const ctxCurriculum = document.getElementById('curriculumChart').getContext('2d');
-    new Chart(ctxCurriculum, {
-        type: 'doughnut',
-        data: {
-            labels: phaseLabels,
-            datasets: [{
-                data: [20, 20, 10, 20, 30],
-                backgroundColor: ['#0ea5e9', '#f97316', '#8b5cf6', '#10b981', '#ef4444'],
-                borderWidth: 0,
-                hoverOffset: 10
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'right', labels: { font: { family: 'Segoe UI' } } },
-                tooltip: commonTooltipOptions
-            },
-            cutout: '65%'
-        }
+  // 5 V's picker
+  const vExplain = {
+    volume: 'FreshCart generates orders, event logs, delivery pings, and reviews every second — individually small, but the total keeps growing every day the business runs.',
+    velocity: 'Delivery tracking and app events arrive continuously in real time, not in a nightly batch — the platform has to keep up as data is produced, not just after the fact.',
+    variety: 'Structured orders (PostgreSQL), semi-structured logistics JSON, and unstructured scraped reviews all coexist — one tool cannot handle all three shapes.',
+    veracity: '"Nobody trusts the numbers" is a veracity problem: without cleaning and validation, raw data cannot be trusted for decisions.',
+    value: 'Data is only worth collecting if it leads somewhere — better delivery times, less stockout, more accurate marketing. Volume without value is just storage cost.'
+  };
+  document.querySelectorAll('.v-node').forEach(node => {
+    node.addEventListener('click', () => {
+      document.querySelectorAll('.v-node').forEach(n => n.classList.remove('active'));
+      node.classList.add('active');
+      const v = node.dataset.v;
+      document.getElementById('v-result').innerHTML = `<strong>${node.querySelector('.full').textContent} at FreshCart:</strong> ${vExplain[v]}`;
     });
+  });
 
-    const formatLabels = [
-        "Row-Based (CSV, JSON, XML)", 
-        "Columnar (Parquet, Avro, ORC)"
-    ].map(wrapLabel);
-
-    const ctxFormat = document.getElementById('formatChart').getContext('2d');
-    new Chart(ctxFormat, {
-        type: 'bar',
-        data: {
-            labels: formatLabels,
-            datasets: [
-                {
-                    label: 'Analytical Read Speed',
-                    data: [25, 95],
-                    backgroundColor: '#0284c7'
-                },
-                {
-                    label: 'Transactional Write Speed',
-                    data: [90, 40],
-                    backgroundColor: '#8b5cf6'
-                },
-                {
-                    label: 'Storage Compression Efficiency',
-                    data: [15, 90],
-                    backgroundColor: '#10b981'
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { beginAtZero: true, max: 100, title: { display: true, text: 'Relative Performance Score' } }
-            },
-            plugins: {
-                tooltip: commonTooltipOptions
-            }
-        }
+  // Tabs: NoSQL types
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
     });
+  });
 
-    const testingLabels = [
-        "Data Reliability", 
-        "Pipeline Uptime", 
-        "Error Detection Speed", 
-        "Manual Intervention", 
-        "Stakeholder Trust"
-    ].map(wrapLabel);
-
-    const ctxTesting = document.getElementById('testingChart').getContext('2d');
-    new Chart(ctxTesting, {
-        type: 'radar',
-        data: {
-            labels: testingLabels,
-            datasets: [
-                {
-                    label: 'Before Automation & Testing',
-                    data: [40, 60, 20, 90, 50],
-                    backgroundColor: 'rgba(239, 68, 68, 0.2)',
-                    borderColor: '#ef4444',
-                    pointBackgroundColor: '#ef4444'
-                },
-                {
-                    label: 'After Airflow & Great Expectations',
-                    data: [95, 98, 90, 15, 95],
-                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                    borderColor: '#10b981',
-                    pointBackgroundColor: '#10b981'
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                r: { angleLines: { display: true }, suggestedMin: 0, suggestedMax: 100 }
-            },
-            plugins: {
-                tooltip: commonTooltipOptions
-            }
-        }
+  // Sorter quiz
+  let selectedItem = null;
+  document.querySelectorAll('.sorter-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.sorter-item').forEach(i => i.style.outline = 'none');
+      selectedItem = item;
+      item.style.outline = '2px solid var(--ntu-blue)';
+      document.getElementById('sorter-feedback').textContent = 'Now click the database type you think this belongs to.';
     });
-
-    const traceOutCore = {
-        x: [50, 100, 250, 500],
-        y: [5, 15, 45, 120],
-        mode: 'markers',
-        type: 'scattergl',
-        name: 'Out-of-Core (Single Node)',
-        marker: { size: 15, color: '#f97316', line: {width: 2, color: 'white'} }
-    };
-
-    const traceBatch = {
-        x: [500, 2000, 5000, 10000],
-        y: [180, 300, 450, 600],
-        mode: 'markers',
-        type: 'scattergl',
-        name: 'Distributed Batch (Spark/Hadoop)',
-        marker: { size: 25, color: '#0ea5e9', line: {width: 2, color: 'white'} }
-    };
-
-    const traceStream = {
-        x: [10, 100, 1000, 5000],
-        y: [0.1, 0.2, 0.5, 1.2],
-        mode: 'markers',
-        type: 'scattergl',
-        name: 'Distributed Stream (Kafka/Spark)',
-        marker: { size: 12, color: '#10b981', symbol: 'diamond', line: {width: 1, color: 'white'} }
-    };
-
-    const layout = {
-        xaxis: {
-            type: 'log',
-            title: 'Data Volume Processed (GB) - Log Scale',
-            gridcolor: '#e2e8f0',
-            zerolinecolor: '#cbd5e1'
-        },
-        yaxis: {
-            type: 'log',
-            title: 'Processing Latency (Seconds) - Log Scale',
-            gridcolor: '#e2e8f0',
-            zerolinecolor: '#cbd5e1'
-        },
-        paper_bgcolor: 'rgba(0,0,0,0)',
-        plot_bgcolor: 'rgba(0,0,0,0)',
-        margin: { l: 60, r: 20, t: 20, b: 60 },
-        legend: { x: 0.05, y: 0.95, bgcolor: 'rgba(255,255,255,0.8)' },
-        hovermode: 'closest'
-    };
-
-    Plotly.newPlot('plotly-scatter', [traceStream, traceOutCore, traceBatch], layout, {responsive: true, displayModeBar: false});
-
+  });
+  document.querySelectorAll('.sorter-target').forEach(target => {
+    target.addEventListener('click', () => {
+      if (!selectedItem) {
+        document.getElementById('sorter-feedback').textContent = 'Pick a use case first.';
+        return;
+      }
+      const correct = selectedItem.dataset.answer === target.dataset.target;
+      selectedItem.classList.remove('correct', 'wrong');
+      selectedItem.classList.add(correct ? 'correct' : 'wrong');
+      selectedItem.style.outline = 'none';
+      document.getElementById('sorter-feedback').textContent = correct
+        ? 'Correct — that fits.'
+        : 'Not quite — think about how the data needs to be looked up, then try another target.';
+      if (correct) selectedItem = null;
+    });
+  });
 </script>
+
 </body>
 </html>
