@@ -55,3 +55,7 @@ FreshCart's transactional orders sit in a PostgreSQL database. Customer reviews 
 ## Why this matters
 
 Before you can build anything, you need a mental model of the data engineering landscape. This unit gives you the vocabulary and conceptual framework to distinguish between different types of data, different types of databases, and different processing paradigms. Without this, every subsequent technical decision will lack context.
+
+---
+
+📄 [View the unit summary page](./docs/index.html) — a visual recap of big data, the data engineering lifecycle, NoSQL types, and MongoDB CRUD.
