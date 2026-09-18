@@ -58,4 +58,4 @@ Before you can build anything, you need a mental model of the data engineering l
 
 ---
 
-📄 [View the unit summary page](./docs/index.html) — a visual recap of big data, the data engineering lifecycle, NoSQL types, and MongoDB CRUD.
+📄 [View module 2 summary page](https://su-ntu-ctp.github.io/5m-data-2.1-intro-big-data-eng/) — a visual recap of big data, the data engineering lifecycle, NoSQL types, and MongoDB CRUD.
